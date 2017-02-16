@@ -8,12 +8,14 @@ import {
 	TouchableOpacity,
 	ToastAndroid,
 	Picker,
+	Button,
 	View
 } from 'react-native';
 import { Counter } from './counter';
 import BluetoothSerial from 'react-native-bluetooth-serial';
 import { Actions } from 'react-native-router-flux';
 import modes from '../modes.json';
+import SettingsScrollView from './SettingsScrollView';
 
 const Item = Picker.Item;
 
@@ -53,6 +55,8 @@ export default class ControlScene extends Component {
 		BluetoothSerial.disconnect()
 		.then(() => {
 			ToastAndroid.show('Disconnected', TOASTLENGTH);
+			this.changeMode(0);
+			this.sendSettings();
 		}).catch((err) => {
 			ToastAndroid.show(`Failed to disconnect: ${err.message}`, TOASTLENGTH);
 		});
@@ -66,21 +70,45 @@ export default class ControlScene extends Component {
 
 	changeMode(mode) {
 		this.setState({ currentMode: mode });
-		//blahblah write
+		this.sendMessage(`MODE ${mode}\n`);
+	}
+
+	changeSetting(number, value) {
+		modes.modes[this.state.currentMode].settings[number].value = value;
+	}
+
+	sendAction() {
+		this.sendMessage('ACTION\n');
+	}
+
+	sendSettings() {
+		//send
+		modes.modes[this.state.currentMode].settings.forEach((s) => {
+			let serialString = `CONFIGURE ${s.id} ${s.value}\n`;
+			this.sendMessage(serialString);
+		});
+	}
+
+	sendMessage(msg) {
+		console.log(msg);
+		BluetoothSerial.write(msg).catch(() => {
+			ToastAndroid.show(`Failed: ${err.message}`);
+		});
 	}
 
 	render() {
 		return (
 			<View style={styles.container}>
-				<Text style={styles.welcome}>
-					{ this.props.deviceId }
-				</Text>
 				<Picker mode="dialog" style={ styles.picker }
 					selectedValue={ this.state.currentMode }
 					onValueChange={ this.changeMode.bind(this) }
 				>
 					{ modes.modes.map((m) => this.modeItem(m)) }
 				</Picker>
+				<Button style={ styles.actionButton } title="Action" onPress={ this.sendAction.bind(this)} />
+				<SettingsScrollView cb={this.changeSetting.bind(this)} settings={modes.modes[this.state.currentMode].settings} />
+				<Button style={ styles.actionButton } title="Send" onPress={ this.sendSettings.bind(this) } />
+
 			</View>
 		);
 	}
@@ -90,7 +118,7 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		justifyContent: 'center',
-		alignItems: 'center',
+		alignItems: 'stretch',
 		backgroundColor: '#F5FCFF',
 	},
 	welcome: {
@@ -101,6 +129,7 @@ const styles = StyleSheet.create({
 	scrollview: {
 		marginTop: 15,
 		backgroundColor: '#F5FCFF',
+		marginBottom: 15
 	},
 	item: {
 		textAlign: 'center',
@@ -110,7 +139,9 @@ const styles = StyleSheet.create({
 		margin: 5
 	},
 	picker: {
-		width: 100
+		marginTop: 50
 	},
+	actionButton: {
+	}
 });
 

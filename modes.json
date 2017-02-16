@@ -2,26 +2,39 @@
 	"modes": [
 		{
 			"name": "Remote",
+			"settings": [],
 			"id": 0
 		},
 
 		{
 			"name": "Delay",
+			"settings": [
+				{ "name": "Delay", "input": "time", "id": 0, "value": 0 }
+			],
 			"id": 1
 		},
 
 		{
 			"name": "IR",
+			"settings": [
+				{ "name": "Delay", "input": "ms", "id": 0, "value": 0 }
+			],
 			"id": 2
 		},
 
 		{
 			"name": "Laser",
+			"settings": [
+				{ "name": "Delay", "input": "ms", "id": 0, "value": 0 }
+			],
 			"id": 3
 		},
 
 		{
 			"name": "Sound",
+			"settings": [
+				{ "name": "Delay", "input": "ms", "id": 0, "value": 0 }
+			],
 			"id": 4
 		}
 	]
