@@ -25,7 +25,6 @@ export default class SettingsScrollViewItem extends Component {
 	renderInput() {
 		return (
 			<TextInput
-				style={{height: 40, borderColor: 'gray', borderWidth: 1}}
 				onChangeText={(text) => {
 						if (text == '') {
 							return;
