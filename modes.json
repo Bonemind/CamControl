@@ -1,0 +1,28 @@
+{
+	"modes": [
+		{
+			"name": "Remote",
+			"id": 0
+		},
+
+		{
+			"name": "Delay",
+			"id": 1
+		},
+
+		{
+			"name": "IR",
+			"id": 2
+		},
+
+		{
+			"name": "Laser",
+			"id": 3
+		},
+
+		{
+			"name": "Sound",
+			"id": 4
+		}
+	]
+}
