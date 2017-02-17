@@ -17,13 +17,12 @@ export default class DeviceSelect extends Component {
 	constructor(props) {
 		super(props);
 		this.state = { devices: [] }
-		this.c = 0;
 	}
 
 	createItem(item) {
-		this.c = this.c + 1;
+		// Create tapable device items
 		return (
-			<TouchableOpacity key={this.c} onPress={() => this.deviceSelected(item.id)}>
+			<TouchableOpacity key={item.id} onPress={() => this.deviceSelected(item.id)}>
 				<Text style={ styles.item } key={item.id}>
 					{item.name}
 				</Text>
@@ -32,15 +31,18 @@ export default class DeviceSelect extends Component {
 	}
 
 	deviceSelected(id) {
+		// Switch to control scene and control the device with the tapped id
 		Actions.controlScene({ deviceId: id });
 	}
 
 	componentWillMount() {
-		BluetoothSerial.on('bluetoothEnabled', () => {this.updateDevices()});
+		// When bluetooth gets enabled, update the device list
+		BluetoothSerial.on('bluetoothEnabled', () => { this.updateDevices() });
 	}
 
 	componentDidMount() {
-		console.log('42');
+		// Check if we need to request bluetooth enabling
+		// When that's done, update the device list
 		BluetoothSerial.isEnabled()
 		.then((val) => {
 			if (!val) {
@@ -52,12 +54,14 @@ export default class DeviceSelect extends Component {
 	}
 
 	updateDevices() {
+		// Update the device list
 		BluetoothSerial.list().then((devs) => {
 			this.setState({devices: devs});
 		});
 	}
 
 	render() {
+		// Render device list
 		return (
 			<View style={styles.container}>
 			<ScrollView style={ styles.scrollview }>

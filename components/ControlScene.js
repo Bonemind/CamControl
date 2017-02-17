@@ -17,8 +17,10 @@ import { Actions } from 'react-native-router-flux';
 import modes from '../modes.json';
 import SettingsScrollView from './SettingsScrollView';
 
+// Store reference to picker item
 const Item = Picker.Item;
 
+// How long our toasts last
 const TOASTLENGTH = 3;
 
 export default class ControlScene extends Component {
@@ -26,22 +28,29 @@ export default class ControlScene extends Component {
 		currentMode: 0,
 		settings: []
 	}
+
 	constructor(props) {
 		super(props);
 	}
 
 	componentWillMount() {
+		// Register some feedback message handlers
 		BluetoothSerial.on('error', (err) => {
 			ToastAndroid.show(`Error: ${err.message}`, TOASTLENGTH)
+			Actions.pop();
 		});
 		BluetoothSerial.on('connectionLost', () => {
 			ToastAndroid.show('Connection to device has been lost', TOASTLENGTH)
-		})
+			Actions.pop();
+		});
+		BluetoothSerial.on('bluetoothDisabled', () => {
+			ToastAndroid.show('Blueooth disabled', TOASTLENGTH)
+			Actions.pop();
+		});
 	}
 
 	componentDidMount() {
-		return;
-		ToastAndroid.show(this.props.deviceId, TOASTLENGTH);
+		// Connect to device
 		BluetoothSerial.connect(this.props.deviceId)
 		.then((res) => {
 			ToastAndroid.show('Connected to device', TOASTLENGTH);
@@ -55,6 +64,7 @@ export default class ControlScene extends Component {
 	}
 	
 	componentWillUnmount() {
+		// Handle disconnect when navigating away
 		BluetoothSerial.disconnect()
 		.then(() => {
 			ToastAndroid.show('Disconnected', TOASTLENGTH);
@@ -64,42 +74,51 @@ export default class ControlScene extends Component {
 	}
 
 	modeItem(mode) {
+		// Draws a mode item
 		return (
 			<Item label={ mode.name } key={ mode.id } value={ mode.id } />
 		);
 	}
 
 	changeMode(mode) {
+		// Handles changing of mode
 		this.setState({ currentMode: mode, settings: JSON.parse(JSON.stringify(modes.modes[mode].settings)) });
-		this.sendMessage(`MODE ${mode}\r\n`);
+		this.sendMessage(`MODE ${mode}`);
 	}
 
 	changeSetting(number, value) {
+		// Handles the storing of a setting value change
+		// Callback passed down to child elements
 		var state = JSON.parse(JSON.stringify(this.state));
 		state.settings[number].value = value;
 		this.setState(state);
 	}
 
 	sendAction() {
-		this.sendMessage('ACTION\r\n');
+		// Sends ACTION to camera controller
+		this.sendMessage('ACTION');
 	}
 
 	sendSettings() {
-		//send
+		// Sends settings to camera controller
 		this.state.settings.forEach((s) => {
-			let serialString = `CONFIGURE ${s.id} ${s.value}\r\n`;
+			let serialString = `CONFIGURE ${s.id} ${s.value}`;
 			this.sendMessage(serialString);
 		});
 	}
 
 	sendMessage(msg) {
+		// Actually sends the message
+		// Message is logged for debug purposes
 		console.log(msg);
-		BluetoothSerial.write(msg).catch(() => {
+		// Linefeed is added because it's expected as a delimiter in the arduino code
+		BluetoothSerial.write(msg + '\r\n').catch(() => {
 			ToastAndroid.show(`Failed: ${err.message}`);
 		});
 	}
 
 	render() {
+		// Render modepicker, settings display and action and send buttons
 		return (
 			<View style={styles.container}>
 				<Picker mode="dropdown" style={ styles.picker }
@@ -113,7 +132,6 @@ export default class ControlScene extends Component {
 				<View style={ styles.sendButton }>
 					<Button style={ styles.sendButton } color='#757575' title="Send" onPress={ this.sendSettings.bind(this) } />
 				</View>
-
 			</View>
 		);
 	}

@@ -18,6 +18,8 @@ import ControlScene from './components/ControlScene';
 
 export default class camcontrol extends Component {
 	render() {
+		// Setup routing
+		// Start at the select deice screen
 		return (
 			<Router style = {styles.container } navigationBarStyle={styles.navBar} titleStyle={styles.navBarTitle} barButtonTextStyle={styles.barButtonTextStyle} barButtonIconStyle={styles.barButtonIconStyle}>
 				<Scene key="root">
@@ -40,7 +42,7 @@ const styles = StyleSheet.create({
 		    color:'#F5F5F5'
 	},
 	barButtonTextStyle:{
-		    color:'#FFFFFF'
+		    color:'#F5F5F5'
 	},
 	barButtonIconStyle:{
 		    tintColor:'rgb(255,255,255)'

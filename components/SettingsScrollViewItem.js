@@ -28,6 +28,8 @@ export default class SettingsScrollViewItem extends Component {
 	}
 	
 	renderMsInput() {
+		// Renders input
+		// When value is changed the passed props.cb is used to update it upstream
 		return (
 			<TextInput
 				onChangeText={(text) => {
