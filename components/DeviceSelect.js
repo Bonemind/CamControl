@@ -47,6 +47,7 @@ export default class DeviceSelect extends Component {
 				return BluetoothSerial.requestEnable();
 			}
 		}).then(() => {
+			this.updateDevices();
 		});
 	}
 
