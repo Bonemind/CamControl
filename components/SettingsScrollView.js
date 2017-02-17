@@ -24,7 +24,7 @@ export default class SettingsScrollView extends Component {
 
 	render() {
 		return (
-			<View>
+			<View style={ styles.wrapper }>
 				<ScrollView style={ styles.scrollview }>
 					{this.renderSettings()}
 				</ScrollView>
@@ -34,32 +34,11 @@ export default class SettingsScrollView extends Component {
 }
 
 const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		justifyContent: 'center',
-		alignItems: 'stretch',
-		backgroundColor: '#F5FCFF',
-	},
-	welcome: {
-		fontSize: 20,
-		textAlign: 'center',
-		margin: 10,
+	wrapper: {
+		marginBottom: 150
 	},
 	scrollview: {
 		marginTop: 15,
-		backgroundColor: '#F5FCFF',
-		marginBottom: 15
+		backgroundColor: '#616161'
 	},
-	item: {
-		textAlign: 'center',
-		borderColor: '#d3d3d3',
-		borderWidth: 1,
-		padding: 5,
-		margin: 5
-	},
-	picker: {
-		marginTop: 50
-	},
-	actionButton: {
-	}
 });

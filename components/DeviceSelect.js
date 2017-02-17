@@ -60,9 +60,6 @@ export default class DeviceSelect extends Component {
 	render() {
 		return (
 			<View style={styles.container}>
-			<Text style={styles.welcome}>
-			Welcome to React Native!
-			</Text>
 			<ScrollView style={ styles.scrollview }>
 				{this.state.devices.map(this.createItem.bind(this))}
 			</ScrollView>
@@ -76,7 +73,7 @@ const styles = StyleSheet.create({
 		flex: 1,
 		justifyContent: 'center',
 		alignItems: 'stretch',
-		backgroundColor: '#F5FCFF',
+		backgroundColor: '#616161',
 	},
 	welcome: {
 		fontSize: 20,
@@ -85,11 +82,12 @@ const styles = StyleSheet.create({
 	},
 	scrollview: {
 		marginTop: 15,
-		backgroundColor: '#F5FCFF',
+		backgroundColor: '#616161',
 	},
 	item: {
 		textAlign: 'center',
-		borderColor: '#d3d3d3',
+		borderColor: '#BDBDBD',
+		color: '#F5F5F5',
 		borderWidth: 1,
 		padding: 5,
 		margin: 5

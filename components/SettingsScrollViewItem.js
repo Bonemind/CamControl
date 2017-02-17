@@ -1,6 +1,7 @@
 
 import React, { Component } from 'react';
 import {
+	TimePickerAndroid,
 	AppRegistry,
 	StyleSheet,
 	ScrollView,
@@ -23,6 +24,10 @@ export default class SettingsScrollViewItem extends Component {
 	}
 	
 	renderInput() {
+		return this.renderMsInput();
+	}
+	
+	renderMsInput() {
 		return (
 			<TextInput
 				onChangeText={(text) => {
@@ -33,7 +38,9 @@ export default class SettingsScrollViewItem extends Component {
 						this.props.cb(this.props.setting.id, text);
 					}
 				}
+				style={ styles.input }
 				keyboardType="numeric"
+				underlineColorAndroid="#F5F5F5"
 				value={this.state.value + ''}
 			/>
 		);
@@ -42,13 +49,21 @@ export default class SettingsScrollViewItem extends Component {
 	render() {
 		return (
 			<View>
-				<Text>
+				<Text style={ styles.text }>
 					{this.props.setting.name}
-					{JSON.stringify(this.props.setting)}
-					{JSON.stringify(this.state)}
 				</Text>
 				{this.renderInput()}
 			</View>
 		);
+	}
+}
+
+const styles = {
+	text: {
+		marginLeft: 5,
+		color: '#F5F5F5',
+	},
+	input: {
+		color: '#F5F5F5',
 	}
 }

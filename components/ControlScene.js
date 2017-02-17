@@ -102,16 +102,17 @@ export default class ControlScene extends Component {
 	render() {
 		return (
 			<View style={styles.container}>
-				<Picker mode="dialog" style={ styles.picker }
+				<Picker mode="dropdown" style={ styles.picker }
 					selectedValue={ this.state.currentMode }
 					onValueChange={ this.changeMode.bind(this) }
 				>
 					{ modes.modes.map((m) => this.modeItem(m)) }
 				</Picker>
-				<Button style={ styles.actionButton } title="Action" onPress={ this.sendAction.bind(this)} />
+				<Button color='#757575' title="Action" onPress={ this.sendAction.bind(this)} />
 				<SettingsScrollView cb={this.changeSetting.bind(this)} settings={ this.state.settings } />
-				<Button style={ styles.actionButton } title="Send" onPress={ this.sendSettings.bind(this) } />
-				<Button style={ styles.actionButton } title="State" onPress={ () => { console.log(JSON.stringify(this.state)) } } />
+				<View style={ styles.sendButton }>
+					<Button style={ styles.sendButton } color='#757575' title="Send" onPress={ this.sendSettings.bind(this) } />
+				</View>
 
 			</View>
 		);
@@ -121,9 +122,9 @@ export default class ControlScene extends Component {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		justifyContent: 'center',
+		justifyContent: 'flex-start',
 		alignItems: 'stretch',
-		backgroundColor: '#F5FCFF',
+		backgroundColor: '#616161'
 	},
 	welcome: {
 		fontSize: 20,
@@ -132,8 +133,8 @@ const styles = StyleSheet.create({
 	},
 	scrollview: {
 		marginTop: 15,
-		backgroundColor: '#F5FCFF',
-		marginBottom: 15
+		marginBottom: 15,
+		backgroundColor: '#616161'
 	},
 	item: {
 		textAlign: 'center',
@@ -143,9 +144,15 @@ const styles = StyleSheet.create({
 		margin: 5
 	},
 	picker: {
-		marginTop: 50
+		marginTop: 50,
+		color: '#F5F5F5',
+		marginLeft: 5
 	},
-	actionButton: {
+	sendButton: {
+		position: 'absolute',
+		bottom: 0,
+		left: 0,
+		right: 0
 	}
 });
 

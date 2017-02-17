@@ -2,7 +2,25 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
+                <item name="android:spinnerItemStyle">@style/SpinnerItem</item>
+        <item name="android:spinnerDropDownItemStyle">@style/SpinnerDropDownItem</item>
     </style>
+    <style name="AppSpinnerDropDownItem" parent="Base.Widget.AppCompat.DropDownItem.Spinner">
+
+    </style>
+    <style name="SpinnerItem" parent="@style/ThemeOverlay.AppCompat.Light">
+        <item name="android:textColor">#F5F5F5</item>
+        <item name="android:backgroundTint">#F5F5F5</item>
+        
+        <item name="android:popupBackground">#616161</item> 
+        <item name="android:gravity">center_vertical</item>
+    </style>
+    <style name="SpinnerDropDownItem">
+        <item name="android:textColor">#F5F5F5</item>
+        <item name="android:background">#616161</item>
+        <item name="android:popupBackground">#616161</item> 
+        <item name="android:gravity">center</item>
+    </style>
+    <!-- Customize your theme here. -->
 
 </resources>
