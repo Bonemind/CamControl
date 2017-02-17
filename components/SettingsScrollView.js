@@ -1,13 +1,10 @@
 
 import React, { Component } from 'react';
 import {
-	AppRegistry,
 	StyleSheet,
 	ScrollView,
-	Text,
 	View
 } from 'react-native';
-import { Counter } from './counter';
 import BluetoothSerial from 'react-native-bluetooth-serial';
 import { Actions } from 'react-native-router-flux';
 import SettingsScrollViewItem from './SettingsScrollViewItem';

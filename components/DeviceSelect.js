@@ -8,7 +8,6 @@ import {
 	TouchableOpacity,
 	View
 } from 'react-native';
-import { Counter } from './counter';
 import BluetoothSerial from 'react-native-bluetooth-serial';
 import { Actions } from 'react-native-router-flux';
 

@@ -1,17 +1,12 @@
 
 import React, { Component } from 'react';
 import {
-	AppRegistry,
 	StyleSheet,
-	ScrollView,
-	Text,
-	TouchableOpacity,
 	ToastAndroid,
 	Picker,
 	Button,
 	View
 } from 'react-native';
-import { Counter } from './counter';
 import BluetoothSerial from 'react-native-bluetooth-serial';
 import { Actions } from 'react-native-router-flux';
 import modes from '../modes.json';
@@ -148,11 +143,6 @@ const styles = StyleSheet.create({
 		fontSize: 20,
 		textAlign: 'center',
 		margin: 10,
-	},
-	scrollview: {
-		marginTop: 15,
-		marginBottom: 15,
-		backgroundColor: '#616161'
 	},
 	item: {
 		textAlign: 'center',

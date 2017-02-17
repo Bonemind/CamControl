@@ -1,15 +1,11 @@
 
 import React, { Component } from 'react';
 import {
-	TimePickerAndroid,
-	AppRegistry,
 	StyleSheet,
-	ScrollView,
 	Text,
 	TextInput,
 	View
 } from 'react-native';
-import { Counter } from './counter';
 import BluetoothSerial from 'react-native-bluetooth-serial';
 import { Actions } from 'react-native-router-flux';
 

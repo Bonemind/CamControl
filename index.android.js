@@ -7,12 +7,9 @@
 import React, { Component } from 'react';
 import {
 	AppRegistry,
-	StyleSheet,
-	Text,
-	View
+	StyleSheet
 } from 'react-native';
 import { Router, Scene } from 'react-native-router-flux';
-import { Testscene } from './components/testscene';
 import DeviceSelect from './components/DeviceSelect';
 import ControlScene from './components/ControlScene';
 
