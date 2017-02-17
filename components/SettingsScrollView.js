@@ -15,6 +15,7 @@ import SettingsScrollViewItem from './SettingsScrollViewItem';
 export default class SettingsScrollView extends Component {
 	renderSettings() {
 		let is = [];
+		console.log(this.props.settings);
 		this.props.settings.forEach((s) => {
 			is.push((<SettingsScrollViewItem cb={this.props.cb} setting={s} key={s.id} />));
 		});

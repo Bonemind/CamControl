@@ -19,7 +19,7 @@ export default class SettingsScrollViewItem extends Component {
 	}
 
 	componentDidMount() {
-		this.state = { value: this.props.value };
+		this.state = { value: this.props.setting.value };
 	}
 	
 	renderInput() {
@@ -44,6 +44,7 @@ export default class SettingsScrollViewItem extends Component {
 			<View>
 				<Text>
 					{this.props.setting.name}
+					{JSON.stringify(this.props.setting)}
 					{JSON.stringify(this.state)}
 				</Text>
 				{this.renderInput()}
