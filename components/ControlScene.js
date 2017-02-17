@@ -32,15 +32,15 @@ export default class ControlScene extends Component {
 		// Register some feedback message handlers
 		BluetoothSerial.on('error', (err) => {
 			ToastAndroid.show(`Error: ${err.message}`, TOASTLENGTH)
-			Actions.pop();
+			this.tryPop();
 		});
 		BluetoothSerial.on('connectionLost', () => {
 			ToastAndroid.show('Connection to device has been lost', TOASTLENGTH)
-			Actions.pop();
+			this.tryPop();
 		});
 		BluetoothSerial.on('bluetoothDisabled', () => {
-			ToastAndroid.show('Blueooth disabled', TOASTLENGTH)
-			Actions.pop();
+			ToastAndroid.show('Bluetooth disabled', TOASTLENGTH)
+			this.tryPop();
 		});
 	}
 
@@ -54,8 +54,16 @@ export default class ControlScene extends Component {
 		})
 		.catch((err) => {
 			ToastAndroid.show(`Failed to connect: ${ err.message }`, TOASTLENGTH)
-			Actions.pop();
+			this.tryPop();
+
 		});
+	}
+
+	tryPop() {
+		try {
+			Actions.pop();
+		} catch (err) {
+		}
 	}
 	
 	componentWillUnmount() {
