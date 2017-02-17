@@ -35,7 +35,22 @@ export default class DeviceSelect extends Component {
 		Actions.controlScene({ deviceId: id });
 	}
 
+	componentWillMount() {
+		BluetoothSerial.on('bluetoothEnabled', () => {this.updateDevices()});
+	}
+
 	componentDidMount() {
+		console.log('42');
+		BluetoothSerial.isEnabled()
+		.then((val) => {
+			if (!val) {
+				return BluetoothSerial.requestEnable();
+			}
+		}).then(() => {
+		});
+	}
+
+	updateDevices() {
 		BluetoothSerial.list().then((devs) => {
 			this.setState({devices: devs});
 		});
